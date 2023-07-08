@@ -12,7 +12,7 @@ class MainViewModel : ViewModel() {
     var height by mutableStateOf("")
     var weight by mutableStateOf("")
     var bmi by mutableStateOf(0f)
-    var judgeColor by mutableStateOf(Color.Gray)
+    var judgedColor by mutableStateOf(Color.Gray)
 
     fun calculateBMI() {
         val heightNum = height.toFloatOrNull()?.div(100) ?: 0f
@@ -20,28 +20,23 @@ class MainViewModel : ViewModel() {
 
         if (heightNum < 0f || weightNum < 0f) {
             bmi = 0f
-            judgeColor = Color.Gray
+            judgedColor = Color.Gray
             return
         }
 
         bmi = (weightNum / heightNum.pow(2) * 10).roundToInt() / 10f
 
-        println(bmi)
-
         // BMIによって色を変える
         if (bmi > 25) {
-            judgeColor = Color.Red
+            judgedColor = Color.Red
             return
         }
 
         if (bmi < 18.5) {
-            judgeColor = Color.Blue
+            judgedColor = Color.Blue
             return
         }
 
-        judgeColor = Color.Gray
+        judgedColor = Color.Gray
     }
-//    fun calculateBmi() {
-//        val bmi = (height / 100) * *2
-//    }
 }

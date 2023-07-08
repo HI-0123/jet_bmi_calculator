@@ -28,7 +28,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
 import com.example.jetbmicalculator.ui.theme.JetBmiCalculatorTheme
 
 class MainActivity : ComponentActivity() {
@@ -54,6 +53,7 @@ class MainActivity : ComponentActivity() {
                             fontWeight = FontWeight.ExtraBold,
                         )
                         Spacer(modifier = Modifier.height(32.dp))
+
                         // 身長
                         PinkLabeledTextField(
                             title = "身長（cm）",
@@ -71,14 +71,14 @@ class MainActivity : ComponentActivity() {
                             placeHolder = "65",
                         )
                         Spacer(modifier = Modifier.height(24.dp))
+
                         Button(
                             modifier = Modifier.fillMaxWidth(),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color(0xFFF85F6A)
                             ),
                             onClick = { viewModel.calculateBMI() },
-
-                            ) {
+                        ) {
                             Text(
                                 text = "計算する",
                                 color = Color.White,
@@ -86,11 +86,14 @@ class MainActivity : ComponentActivity() {
                                 fontWeight = FontWeight.ExtraBold,
                             )
                         }
-                        Spacer(modifier = Modifier.height(32.dp))
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        // 計算結果
                         Text(
-                            modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
                             text = "あなたのBMIは ${viewModel.bmi} です。",
-                            color = viewModel.judgeColor,
+                            color = viewModel.judgedColor,
                             fontSize = 24.sp,
                             fontWeight = FontWeight.ExtraBold,
 
@@ -122,7 +125,12 @@ class MainActivity : ComponentActivity() {
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color.Transparent
             ),
-            placeholder = { Text(text = placeHolder, color = Color.LightGray) },
+            placeholder = {
+                Text(
+                    text = placeHolder,
+                    color = Color.LightGray,
+                )
+            },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
         )
